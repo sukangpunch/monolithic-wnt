@@ -1,1 +1,22 @@
-spring.application.name=monolithic-wnt
+spring:
+  application:
+    name: mono-wnt
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mono_wnt_db
+    username: wnt_user
+    password: test1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  sql:
+    init:
+      mode: always
