@@ -1,6 +1,6 @@
 package com.appcenter.monolithicwnt.auth.infrastructure;
 
-import com.appcenter.monolithicwnt.auth.application.JwtManager;
+import com.appcenter.monolithicwnt.auth.application.TokenManager;
 import com.appcenter.monolithicwnt.global.exception.BusinessException;
 import com.appcenter.monolithicwnt.global.exception.ErrorCode;
 import com.appcenter.monolithicwnt.user.dto.request.Authentication;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 import static io.jsonwebtoken.Jwts.SIG.HS256;
 
 @Component
-public class JwtTokenManager implements JwtManager {
+public class JwtTokenManager implements TokenManager {
 
     private final int expiration;
     private final String secretKey;

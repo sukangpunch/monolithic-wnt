@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final JwtManager jwtManager;
+    private final TokenManager tokenManager;
 
     public String login(LoginRequest request) {
         User user =  userRepository.findByEmail(request.email())
@@ -28,11 +28,11 @@ public class AuthService {
             throw new BusinessException(ErrorCode.USER_NOT_FOUND);
         }
 
-        return jwtManager.createToken(user.getId(),user.getEmail());
+        return tokenManager.createToken(user.getId(),user.getEmail());
     }
 
     public Authentication getAuthenticationByToken(String token) {
-        Authentication authentication = jwtManager.extractAuthentication(token);
+        Authentication authentication = tokenManager.extractAuthentication(token);
         log.info("Authentication: {}", authentication);
 
         if(!userRepository.existsById(authentication.id())) {
