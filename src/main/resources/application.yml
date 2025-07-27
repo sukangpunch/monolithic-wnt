@@ -20,3 +20,9 @@ spring:
   sql:
     init:
       mode: always
+
+jwt:
+  secret:
+    key: qwdhui83jvnllw133EJBCA712jnfe982329H#p219qnf43yj90j32
+  expiration:
+    time: 7200000
