@@ -37,26 +37,17 @@ public class Store {
     private StoreStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User ownerId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BusinessHour businessHour;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private StoreHoliday storeHoliday;
+    private User owner;
 
     public Store(String name, String phone, String instagram,
-                 Address address, StoreStatus status,
-                 User ownerId, BusinessHour businessHour, StoreHoliday storeHoliday) {
+                 Address address, User owner) {
         validate(name, phone, instagram);
         this.name = name;
         this.phone = phone;
         this.instagram = instagram;
         this.address = address;
-        this.status = status;
-        this.ownerId = ownerId;
-        this.businessHour = businessHour;
-        this.storeHoliday = storeHoliday;
+        this.status = StoreStatus.SUSPENDED;
+        this.owner = owner;
     }
 
     private void validate(String name, String phone, String instagram) {

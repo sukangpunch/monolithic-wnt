@@ -29,17 +29,23 @@ public class BusinessHour {
     @Column(nullable = false)
     private LocalTime closeDateTime;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SlotIntervalTimes slotIntervalTimes;
+
     @Column(nullable = false)
     private boolean isNextDayClose;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Store store;
 
-    public BusinessHour(DayOfWeek dayOfWeek, LocalTime openDateTime, LocalTime closeDateTime, boolean isNextDayClose, Store store) {
+    public BusinessHour(DayOfWeek dayOfWeek, LocalTime openDateTime, LocalTime closeDateTime,
+                        int slotInterval, boolean isNextDayClose, Store store) {
         isOpenBeforeClose(openDateTime, closeDateTime,isNextDayClose);
         this.dayOfWeek = dayOfWeek;
         this.openDateTime = openDateTime;
         this.closeDateTime = closeDateTime;
+        this.slotIntervalTimes = SlotIntervalTimes.from(slotInterval);
         this.isNextDayClose = isNextDayClose;
         this.store = store;
     }
@@ -50,5 +56,4 @@ public class BusinessHour {
             throw new BusinessException(ErrorCode.STORE_OPEN_CLOSE_INVALID);
         }
     }
-
 }
