@@ -30,6 +30,7 @@ public enum ErrorCode {
     STORE_LONGITUDE_INVALID("S-009", "유효하지 않은 경도입니다.", HttpStatus.BAD_REQUEST),
     STORE_OPEN_CLOSE_INVALID("S-010", "유효하지 않은 Open-Close 시간대 입니다.", HttpStatus.BAD_REQUEST),
     STORE_SLOT_TIME_INVALID("S-11", "유효하지 않은 Slot-Time 입니다.", HttpStatus.BAD_REQUEST),
+    STORE_START_END_INVALID("S-12", "유효하지 않은 Break-Time 입니다.", HttpStatus.BAD_REQUEST),
 
     // Menu
     MENU_NAME_INVALID("M-001", "유효하지 않은 메뉴 이름입니다.", HttpStatus.BAD_REQUEST),

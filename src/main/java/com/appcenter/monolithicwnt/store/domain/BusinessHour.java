@@ -36,6 +36,7 @@ public class BusinessHour {
     @Column(nullable = false)
     private boolean isNextDayClose;
 
+    @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Store store;
 

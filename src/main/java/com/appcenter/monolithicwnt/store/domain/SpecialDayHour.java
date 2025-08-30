@@ -5,26 +5,27 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalTime;
 
-@Entity(name = "store_holidays")
+@Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StoreHoliday {
+public class SpecialDayHour {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private LocalDate holidayDate;
-
     @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private Store store;
+    private SpecialDay specialDay;
 
-    public StoreHoliday(Store store, LocalDate holidayDate) {
-        this.holidayDate = holidayDate;
-        this.store = store;
-    }
+    @Column(nullable=false)
+    private LocalTime startTime;
+
+    @Column(nullable=false)
+    private LocalTime endTime;
+
+    @Column(nullable=false)
+    private boolean nextDayClose;
 }

@@ -36,6 +36,7 @@ public class Store {
     @Enumerated(EnumType.STRING)
     private StoreStatus status;
 
+    @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private User owner;
 
