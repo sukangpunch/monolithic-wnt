@@ -1,15 +1,15 @@
 package com.appcenter.monolithicwnt.store.infrastructure;
 
-import com.appcenter.monolithicwnt.store.domain.BusinessHour;
+import com.appcenter.monolithicwnt.store.domain.BreakHour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 
 import java.time.DayOfWeek;
 import java.util.List;
 
-public interface BusinessHourRepository extends JpaRepository<BusinessHour, Long> {
+public interface BreakHourRepository extends JpaRepository<BreakHour, Long> {
 
     @Modifying
     int deleteByStore_Id(Long storeId);
-    List<BusinessHour> findByStore_IdAndDayOfWeekOrderByOpenTimeAsc(Long storeId, DayOfWeek dayOfWeek);
+    List<BreakHour> findByStore_IdAndDayOfWeekOrderByStartTimeAsc(Long storeId, DayOfWeek dayOfWeek);
 }

@@ -24,36 +24,31 @@ public class BusinessHour {
     private DayOfWeek dayOfWeek;
 
     @Column(nullable = false)
-    private LocalTime openDateTime;
+    private LocalTime openTime;
 
     @Column(nullable = false)
-    private LocalTime closeDateTime;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private SlotIntervalTimes slotIntervalTimes;
+    private LocalTime closeTime;
 
     @Column(nullable = false)
-    private boolean isNextDayClose;
+    private boolean nextDayClose;
 
     @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Store store;
 
-    public BusinessHour(DayOfWeek dayOfWeek, LocalTime openDateTime, LocalTime closeDateTime,
-                        int slotInterval, boolean isNextDayClose, Store store) {
-        isOpenBeforeClose(openDateTime, closeDateTime,isNextDayClose);
+    public BusinessHour(Store store, DayOfWeek dayOfWeek, LocalTime openTime, LocalTime closeTime
+                        , boolean nextDayClose) {
+        isOpenBeforeClose(openTime, closeTime, nextDayClose);
         this.dayOfWeek = dayOfWeek;
-        this.openDateTime = openDateTime;
-        this.closeDateTime = closeDateTime;
-        this.slotIntervalTimes = SlotIntervalTimes.from(slotInterval);
-        this.isNextDayClose = isNextDayClose;
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+        this.nextDayClose = nextDayClose;
         this.store = store;
     }
 
     // 영업 시작 - 영업 끝에 일자가 변경된다면(예: 화(OPEN)-수(CLOSE)) OPEN 시간보다 CLOSE 가 더 작을 수 있습니다.
-    private void isOpenBeforeClose(LocalTime openDateTime, LocalTime closeDateTime, boolean isNextDayClose) {
-        if(!isNextDayClose && !openDateTime.isBefore(closeDateTime)) {
+    private void isOpenBeforeClose(LocalTime openDateTime, LocalTime closeDateTime, boolean nextDayClose) {
+        if(!nextDayClose && !openDateTime.isBefore(closeDateTime)) {
             throw new BusinessException(ErrorCode.STORE_OPEN_CLOSE_INVALID);
         }
     }

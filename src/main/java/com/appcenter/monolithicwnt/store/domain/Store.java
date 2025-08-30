@@ -34,18 +34,25 @@ public class Store {
     private Address address;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StoreStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SlotIntervalTimes slotIntervalTimes;
 
     @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private User owner;
 
     public Store(String name, String phone, String instagram,
+                 int slotIntervalTimes,
                  Address address, User owner) {
         validate(name, phone, instagram);
         this.name = name;
         this.phone = phone;
         this.instagram = instagram;
+        this.slotIntervalTimes = SlotIntervalTimes.from(slotIntervalTimes);
         this.address = address;
         this.status = StoreStatus.SUSPENDED;
         this.owner = owner;

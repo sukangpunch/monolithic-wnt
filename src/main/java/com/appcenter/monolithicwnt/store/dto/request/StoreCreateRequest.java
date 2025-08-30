@@ -5,6 +5,7 @@ public record StoreCreateRequest(
         String phone,
         String instagram,
         String fullAddress,
+        int slotIntervalTimes,
         double latitude,
         double longitude
 ) {

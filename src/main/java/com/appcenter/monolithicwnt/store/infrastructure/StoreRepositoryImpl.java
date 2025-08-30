@@ -12,7 +12,6 @@ import java.util.Optional;
 public class StoreRepositoryImpl implements StoreRepository {
     private final StoreJpaRepository jpaRepository;
 
-
     @Override
     public void save(Store store) {
         jpaRepository.save(store);

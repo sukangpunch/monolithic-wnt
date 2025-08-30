@@ -30,20 +30,26 @@ public class BreakHour {
     private LocalTime endTime;
 
     @Column(nullable = false)
-    private boolean isNextDayClose;
+    private boolean nextDayClose;
 
     @JoinColumn(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Store store;
 
-    public BreakHour(Store store, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, boolean isNextDayClose) {
-        if(!isNextDayClose && !startTime.isBefore(endTime)) {
-            throw new BusinessException(ErrorCode.STORE_START_END_INVALID);
+    public BreakHour(Store store, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, boolean nextDayClose) {
+        if(!nextDayClose && !startTime.isBefore(endTime)) {
+            throw new BusinessException(ErrorCode.STORE_BREAK_START_END_INVALID);
         }
         this.store = store;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.isNextDayClose = isNextDayClose;
+        this.nextDayClose = nextDayClose;
+    }
+
+    private void isStartBeforeEnd(LocalTime startTime, LocalTime endTime, boolean nextDayClose) {
+        if(!nextDayClose && !startTime.isBefore(endTime)) {
+            throw new BusinessException(ErrorCode.STORE_BREAK_START_END_INVALID);
+        }
     }
 }

@@ -30,8 +30,11 @@ public class StoreService {
         }
 
         Address address = new Address(request.fullAddress(), request.latitude(), request.longitude());
-        Store newStore = new Store(request.name(), request.phone(), request.instagram(), address, user);
+        Store newStore = new Store(request.name(), request.phone(), request.instagram(), request.slotIntervalTimes(), address, user);
 
         storeRepository.save(newStore);
     }
+
+
+
 }

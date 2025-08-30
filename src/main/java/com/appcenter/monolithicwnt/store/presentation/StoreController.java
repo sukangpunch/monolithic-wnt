@@ -22,8 +22,9 @@ public class StoreController implements StoreControllerDocs {
     private final StoreQueryService storeQueryService;
 
     @PostMapping("/create")
-    public ResponseEntity<SuccessResponse<?>> createStore(@RequestBody StoreCreateRequest request,
-                                                          @AuthenticationPrincipal Authentication authentication) {
+    public ResponseEntity<SuccessResponse<?>> createStore(
+            @RequestBody StoreCreateRequest request,
+            @AuthenticationPrincipal Authentication authentication) {
         Long ownerId = authentication.id();
         storeService.createStore(request,ownerId);
         HttpStatus status = HttpStatus.CREATED;
@@ -31,7 +32,8 @@ public class StoreController implements StoreControllerDocs {
     }
 
     @GetMapping("/{storeId}")
-    public ResponseEntity<SuccessResponse<StoreResponse>> getStores(@PathVariable("storeId") Long storeId) {
+    public ResponseEntity<SuccessResponse<StoreResponse>> getStores(
+            @PathVariable("storeId") Long storeId) {
         StoreResponse response = storeQueryService.getStore(storeId);
         HttpStatus status = HttpStatus.OK;
         return ResponseEntity.status(status).body(SuccessResponse.of(status,response));
