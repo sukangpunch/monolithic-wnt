@@ -37,9 +37,7 @@ public class BreakHour {
     private Store store;
 
     public BreakHour(Store store, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, boolean nextDayClose) {
-        if(!nextDayClose && !startTime.isBefore(endTime)) {
-            throw new BusinessException(ErrorCode.STORE_BREAK_START_END_INVALID);
-        }
+        isStartBeforeEnd(startTime,endTime,nextDayClose);
         this.store = store;
         this.dayOfWeek = dayOfWeek;
         this.startTime = startTime;

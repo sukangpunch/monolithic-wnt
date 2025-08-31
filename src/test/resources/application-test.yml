@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: false
+    open-in-view: false
+
+  sql:
+    init:
+      mode: never
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG                # 실행되는 SQL (DDL/DML)
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.orm.tool.schema: DEBUG
+
+jwt:
+  secret:
+    key: qwdhui83jvnllw133EJBCA712jnfe982329H#p219qnf43yj90j32
+  expiration:
+    time: 7200000

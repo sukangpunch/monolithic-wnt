@@ -36,11 +36,4 @@ public class Holiday {
             throw new BusinessException(ErrorCode.STORE_HOLIDAY_INVALID);
         }
     }
-
-    public static Holiday closed(Store store, LocalDate date) {
-        return new Holiday(store, date);
-    }
-    public static Holiday custom(Store store, LocalDate date) {
-        return new Holiday(store, date);
-    }
 }

@@ -13,6 +13,7 @@ public interface HolidayRepository extends JpaRepository<Holiday, Long> {
     @Modifying
     int deleteByStore_Id(Long storeId);
     List<Holiday> findByStore_Id(Long storeId);
+    List<Holiday> findByStore_IdOrderByDateAsc(Long storeId);
     Optional<Holiday> findByStore_IdAndDate(Long storeId, LocalDate date);
     boolean existsByStore_IdAndDate(Long storeId, LocalDate date);
 }

@@ -79,9 +79,6 @@ public class StoreScheduleService {
     // ================== 휴일 업서트(전량 교체) ==================
     @Transactional
     public void upsertHolidays(Long storeId, HolidayRequest request) {
-        if (!Objects.equals(storeId, request.storeId()))
-            throw new BusinessException(ErrorCode.STORE_NOT_FOUND);
-
         Store store = storeRepository.findById(storeId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.STORE_NOT_FOUND));
 
@@ -114,12 +111,24 @@ public class StoreScheduleService {
 
     /** 22:00~02:00 → [22:00,24:00) + [00:00,02:00) */
     private List<Seg> splitByMidnight(DayOfWeek dow, LocalTime s, LocalTime e, boolean nextDay) {
-        if (!nextDay) return List.of(new Seg(dow, s, e));
+        if(s.equals(e))
+            return List.of();
+
+        boolean crossesMidnight = nextDay || e.isBefore(s);
+
+        // 자정 넘김 여부 판단
+        if(!crossesMidnight)
+            return List.of(new Seg(dow, s, e));
 
         List<Seg> out = new ArrayList<>(2);
-        if (!s.equals(LocalTime.MIDNIGHT)) out.add(new Seg(dow, s, LocalTime.MIDNIGHT));
+
+        if (!s.equals(LocalTime.MIDNIGHT))
+            out.add(new Seg(dow, s, LocalTime.MIDNIGHT));
+
         DayOfWeek next = dow.plus(1);
-        if (!e.equals(LocalTime.MIDNIGHT)) out.add(new Seg(next, LocalTime.MIDNIGHT, e));
+        if (!e.equals(LocalTime.MIDNIGHT))
+            out.add(new Seg(next, LocalTime.MIDNIGHT, e));
+
         return out;
     }
 
@@ -139,8 +148,10 @@ public class StoreScheduleService {
             segs.sort(Comparator.comparing(Seg::start));
             LocalTime prevEnd = null;
             for (Seg seg : segs) {
+                log.info("Checking seg: day : {}, start : {}, end : {}", seg.dow, seg.start, seg.end);
                 // 겹침만 금지, 맞닿음(==)은 허용: s < prevEnd 이면 겹침
                 if (prevEnd != null && seg.start.isBefore(prevEnd)) {
+                    log.info("prevEnd : {} , nowStart : {}", prevEnd, seg.start);
                     throw new BusinessException(ErrorCode.STORE_OPEN_CLOSE_INVALID);
                 }
                 if (prevEnd == null || seg.end.isAfter(prevEnd)) prevEnd = seg.end;
