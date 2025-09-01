@@ -6,9 +6,10 @@ import com.appcenter.monolithicwnt.store.dto.request.*;
 import com.appcenter.monolithicwnt.store.infrastructure.BreakHourRepository;
 import com.appcenter.monolithicwnt.store.infrastructure.BusinessHourRepository;
 import com.appcenter.monolithicwnt.store.infrastructure.HolidayRepository;
+import com.appcenter.monolithicwnt.store.infrastructure.StoreRepository;
 import com.appcenter.monolithicwnt.user.domain.User;
 import com.appcenter.monolithicwnt.user.infrastructure.UserRepository;
-import org.assertj.core.api.Assertions;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -22,18 +23,17 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureTestDatabase
+@Slf4j
 class StoreScheduleServiceTest {
 
-    private static final Logger log = LoggerFactory.getLogger(StoreScheduleServiceTest.class);
     @Autowired
     private StoreScheduleService storeScheduleService;
 

@@ -4,8 +4,8 @@ import com.appcenter.monolithicwnt.global.exception.BusinessException;
 import com.appcenter.monolithicwnt.global.exception.ErrorCode;
 import com.appcenter.monolithicwnt.store.domain.Address;
 import com.appcenter.monolithicwnt.store.domain.Store;
-import com.appcenter.monolithicwnt.store.domain.StoreRepository;
 import com.appcenter.monolithicwnt.store.dto.request.StoreCreateRequest;
+import com.appcenter.monolithicwnt.store.infrastructure.StoreRepository;
 import com.appcenter.monolithicwnt.user.domain.User;
 import com.appcenter.monolithicwnt.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +34,4 @@ public class StoreService {
 
         storeRepository.save(newStore);
     }
-
-
-
 }

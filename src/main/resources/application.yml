@@ -11,14 +11,20 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+
+    defer-datasource-initialization: true
     properties:
       hibernate:
         show_sql: false
         format_sql: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-#  sql:
-#    init:
-#      mode: always
+  sql:
+    init:
+      mode: always
+      data-locations:
+        - classpath:sql/001_store_data.sql
+      continue-on-error: false
+      encoding: UTF-8
 
 logging:
   level:
