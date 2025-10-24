@@ -1,29 +1,24 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mono_wnt_db
-    username: wnt_user
-    password: test1234
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
 
   jpa:
-    database:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
+        format_sql: true
         show_sql: false
-        format_sql: false
-    defer-datasource-initialization: true
     open-in-view: false
 
   sql:
     init:
-      mode: always
-      data-locations:
-        - classpath:sql/001_store_data.sql
-      continue-on-error: false
-      encoding: UTF-8
+      mode: never
 
 logging:
   level:

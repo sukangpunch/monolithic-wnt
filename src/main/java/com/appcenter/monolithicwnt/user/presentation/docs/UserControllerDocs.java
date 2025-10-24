@@ -7,6 +7,7 @@ import com.appcenter.monolithicwnt.user.dto.request.Authentication;
 import com.appcenter.monolithicwnt.user.dto.request.UserCreateRequest;
 import com.appcenter.monolithicwnt.user.dto.response.UserProfileResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -56,5 +57,6 @@ public interface UserControllerDocs {
                     content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
     })
     @GetMapping("/me")
-    ResponseEntity<SuccessResponse<UserProfileResponse>> getUserProfile(@AuthenticationPrincipal Authentication authentication);
+    ResponseEntity<SuccessResponse<UserProfileResponse>> getUserProfile(
+            @Parameter(hidden = true) @AuthenticationPrincipal Authentication authentication);
 }

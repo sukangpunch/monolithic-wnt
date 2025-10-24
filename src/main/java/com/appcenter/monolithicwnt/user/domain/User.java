@@ -1,6 +1,8 @@
 package com.appcenter.monolithicwnt.user.domain;
 
 import com.appcenter.monolithicwnt.global.domain.BaseEntity;
+import com.appcenter.monolithicwnt.global.exception.BusinessException;
+import com.appcenter.monolithicwnt.global.exception.ErrorCode;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,19 +43,19 @@ public class User extends BaseEntity {
 
     private void validateEmail(String email){
         if(email == null || email.isBlank() || !email.matches(EMAIL_REGEX)){
-            throw new RuntimeException();
+            throw new BusinessException(ErrorCode.EMAIL_INVALID);
         }
     }
 
     private void validatePassword(String password){
         if(password == null || password.isBlank()){
-            throw new RuntimeException();
+            throw new BusinessException(ErrorCode.PASSWORD_INVALID);
         }
     }
 
     private void validateNickname(String nickname){
         if(nickname == null || nickname.isBlank()){
-            throw new RuntimeException();
+            throw new BusinessException(ErrorCode.NICKNAME_INVALID);
         }
     }
 

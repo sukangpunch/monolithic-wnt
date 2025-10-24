@@ -24,13 +24,15 @@ public class UserController implements UserControllerDocs {
     @PostMapping("/create")
     public ResponseEntity<SuccessResponse<?>> createUser(@RequestBody UserCreateRequest request){
         userService.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(SuccessResponse.of(HttpStatus.CREATED, null));
+        HttpStatus status = HttpStatus.CREATED;
+        return ResponseEntity.status(status).body(SuccessResponse.of(status, null));
     }
 
     @GetMapping("/me")
     public ResponseEntity<SuccessResponse<UserProfileResponse>> getUserProfile(
             @AuthenticationPrincipal Authentication authentication) {
         UserProfileResponse response = userQueryService.getUserProfile(authentication.id());
-        return ResponseEntity.status(HttpStatus.OK).body(SuccessResponse.of(HttpStatus.OK, response));
+        HttpStatus status = HttpStatus.OK;
+        return ResponseEntity.status(status).body(SuccessResponse.of(status, response));
     }
 }
