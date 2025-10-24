@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: wnt_postgres
+    environment:
+      POSTGRES_DB: mono_wnt_db
+      POSTGRES_USER: wnt_user
+      POSTGRES_PASSWORD: test1234
+      TZ: Asia/Seoul
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data_local:/var/lib/postgresql/data

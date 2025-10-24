@@ -42,7 +42,13 @@ public class Menu {
     @Column(name = "detail", nullable = false)
     private List<String> details;
 
-    public Menu(String name, int price, boolean representative, Store store, List<String> details) {
+    public Menu(
+            String name,
+            int price,
+            boolean representative,
+            Store store,
+            List<String> details
+    ) {
         validate(name, price, details);
         this.name = name;
         this.price = price;

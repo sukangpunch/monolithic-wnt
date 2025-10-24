@@ -1,7 +1,4 @@
 spring:
-  application:
-    name: mono-wnt
-
   datasource:
     url: jdbc:postgresql://localhost:5432/mono_wnt_db
     username: wnt_user
@@ -9,15 +6,17 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
+    database:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create-drop
-
-    defer-datasource-initialization: true
     properties:
       hibernate:
         show_sql: false
         format_sql: false
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    defer-datasource-initialization: true
+    open-in-view: false
+
   sql:
     init:
       mode: always
