@@ -25,14 +25,28 @@ spring:
       continue-on-error: false
       encoding: UTF-8
 
-logging:
-  level:
-    org.hibernate.SQL: DEBUG                # 실행되는 SQL (DDL/DML)
-    org.hibernate.orm.jdbc.bind: TRACE
-    org.hibernate.orm.tool.schema: DEBUG
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 jwt:
   secret:
     key: qwdhui83jvnllw133EJBCA712jnfe982329H#p219qnf43yj90j32
   expiration:
     time: 7200000
+
+cloud:
+  aws:
+    credentials:
+      access-key: aaaaaaaaaaaaaa
+      secret-key: aaaaaaaaaaaaa
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    s3:
+      bucket: "{}"
+      url:
+        default: "https://{}.s3.ap-northeast-2.amazonaws.com/"
+        uploaded: "https://{}.s3.ap-northeast-2.amazonaws.com/"

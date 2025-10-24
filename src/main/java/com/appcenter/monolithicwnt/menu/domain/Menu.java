@@ -34,6 +34,9 @@ public class Menu {
     @ManyToOne(fetch = FetchType.LAZY)
     private Store store;
 
+    @Column
+    private String menuImgUrl;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "menu_details",
@@ -47,6 +50,7 @@ public class Menu {
             int price,
             boolean representative,
             Store store,
+            String menuImgUrl,
             List<String> details
     ) {
         validate(name, price, details);
@@ -54,6 +58,7 @@ public class Menu {
         this.price = price;
         this.representative = representative;
         this.store = store;
+        this.menuImgUrl = menuImgUrl;
         this.details = details;
     }
 

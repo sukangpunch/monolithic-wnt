@@ -45,7 +45,15 @@ public enum ErrorCode {
     TOKEN_EXPIRED("T-002", "만료된 토큰입니다.", HttpStatus.UNAUTHORIZED),
     TOKEN_EMPTY("T-003", "빈 토큰입니다.", HttpStatus.UNAUTHORIZED),
     TOKEN_NOT_SIGNED("T-004", "서명되지 않은 토큰입니다.", HttpStatus.UNAUTHORIZED),
-    TOKEN_NOT_FOUND("T-005", "토큰을 찾을 수 없습니다.", HttpStatus.UNAUTHORIZED);
+    TOKEN_NOT_FOUND("T-005", "토큰을 찾을 수 없습니다.", HttpStatus.UNAUTHORIZED),
+
+    // S3
+    S3_SERVICE_EXCEPTION("S3-001", "S3 서비스 예외가 발생했습니다.", HttpStatus.BAD_REQUEST),
+    S3_CLIENT_EXCEPTION("S3-002", "S3 클라이언트 예외가 발생했습니다.", HttpStatus.BAD_REQUEST),
+    NOT_ALLOWED_FILE_EXTENSIONS("S3-003","허용되지 않은 확장자입니다.",HttpStatus.BAD_REQUEST),
+    INVALID_FILE_EXTENSIONS("S3-004", "파일 형식이 유효하지 않습니다.", HttpStatus.BAD_REQUEST),
+    ;
+
 
     private final String code;
     private final String message;
